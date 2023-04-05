@@ -28,5 +28,7 @@ import cv2
 
 img =  cv2.imread('resources/images/ubuntu.png')
 
-imgGray = cv2.cvtColor(img, cv2.COLOR_BAYER_BG2GRAY)
+imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
+cv2.imshow('gray', imgGray)
+cv2.waitKey(0)
