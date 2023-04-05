@@ -15,13 +15,18 @@ import cv2
 #         break
 
 # webcam
-cam = cv2.VideoCapture(0)
+# cam = cv2.VideoCapture(0)
+#
+# while True:
+#     check, frame = cam.read()
+#     cv2.imshow('video', frame)
+#     key = cv2.waitKey(1)
+#     if key & 0xFF == ord('q'):
+#         break
+# cam.release()
+# cv2.destroyAllWindows()
 
-while True:
-    check, frame = cam.read()
-    cv2.imshow('video', frame)
-    key = cv2.waitKey(1)
-    if key & 0xFF == ord('q'):
-        break
-cam.release()
-cv2.destroyAllWindows()
+img =  cv2.imread('resources/images/ubuntu.png')
+
+imgGray = cv2.cvtColor(img, cv2.COLOR_BAYER_BG2GRAY)
+
