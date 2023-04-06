@@ -44,7 +44,7 @@ import numpy as np
 
 # cv2.waitKey(0)
 
-
+# Resize and cropping
 img = cv2.imread('resources/images/linux_mint_logo.png')
 print(img.shape)
 
