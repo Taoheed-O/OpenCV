@@ -26,19 +26,35 @@ import numpy as np
 # cam.release()
 # cv2.destroyAllWindows()
 
-img =  cv2.imread('resources/images/ubuntu.png')
-kernel = np.ones((5,5), np.uint8)
+# color sections
+# img =  cv2.imread('resources/images/ubuntu.png')
+# kernel = np.ones((5,5), np.uint8)
 
-imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-imgBlur =  cv2.GaussianBlur(imgGray,(7,7), 0)
-imgCanny = cv2.Canny(img, 100, 100)
-imgDialation = cv2.dilate(imgCanny, kernel, iterations=1)
-imgEroded = cv2.erode(imgDialation, kernel, iterations=1)
+# imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# imgBlur =  cv2.GaussianBlur(imgGray,(7,7), 0)
+# imgCanny = cv2.Canny(img, 100, 100)
+# imgDialation = cv2.dilate(imgCanny, kernel, iterations=1)
+# imgEroded = cv2.erode(imgDialation, kernel, iterations=1)
 
-cv2.imshow('gray', imgGray)
-cv2.imshow('blur', imgBlur)
-cv2.imshow('canny', imgCanny)
-cv2.imshow('Dilation', imgDialation)
-cv2.imshow('Eroded', imgEroded)
+# cv2.imshow('gray', imgGray)
+# cv2.imshow('blur', imgBlur)
+# cv2.imshow('canny', imgCanny)
+# cv2.imshow('Dilation', imgDialation)
+# cv2.imshow('Eroded', imgEroded)
+
+# cv2.waitKey(0)
+
+
+img = cv2.imread('resources/images/linux_mint_logo.png')
+print(img.shape)
+
+imgResize = cv2.resize(img, (300, 200))
+print(imgResize.shape)
+
+imgCropped = img[0:200, 200:500]
+
+cv2.imshow('Image', img)
+cv2.imshow('Image Resize', imgResize)
+cv2.imshow('Image crop',imgCropped)
 
 cv2.waitKey(0)
