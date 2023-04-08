@@ -1,5 +1,20 @@
 import cv2
 import numpy as np
+
+
+def stackImages(scale, imgArray):
+    rows = len(imgArray)
+    cols = len(imgArray[0])
+    rowsAvailable = isinstance(imgArray[0], list)
+    width = imgArray[0][0].shape[1]
+    height = imgArray[0][0].shape[0]
+    if rowsAvailable:
+        for x in range(0, rows):
+            for y in range(0, cols):
+                if imgArray[x][y].shape[:2] == imgArray[0][0].shape[:2]:
+                    imgArray[x][y] = cv2.resize(imgArray[x][y], (0,0), None,)   
+
+
 # image
 # print('package imported')
 # img = cv2.imread('resources/images/ubuntu.png')
@@ -78,15 +93,27 @@ import numpy as np
 
 
 # Warp perspective
+# img = cv2.imread('resources/images/linux_mint_logo.png')
+
+# width, height = 250,350
+# pts1 = np.float32([[111, 219], [287, 188], [154, 482],[352, 440]])
+# pts2 = np.float32([[0,0],[width,0],[0,height],[width, height]])
+# matrix = cv2.getPerspectiveTransform(pts1, pts2)
+# imgOutput = cv2.warpPerspective(img, matrix, (width, height))
+
+# cv2.imshow('Image', img)
+# cv2.imshow('output', imgOutput)
+
+# cv2.waitKey(0)
+
+
+# joining Images
 img = cv2.imread('resources/images/linux_mint_logo.png')
 
-width, height = 250,350
-pts1 = np.float32([[111, 219], [287, 188], [154, 482],[352, 440]])
-pts2 = np.float32([[0,0],[width,0],[0,height],[width, height]])
-matrix = cv2.getPerspectiveTransform(pts1, pts2)
-imgOutput = cv2.warpPerspective(img, matrix, (width, height))
+# imgHor = np.hstack((img, img))
+# imgVert = np.vstack((img, img))
 
-cv2.imshow('Image', img)
-cv2.imshow('output', imgOutput)
+# cv2.imshow('horizontal stack', imgHor)
+# cv2.imshow('vertical stack', imgVert)
 
 cv2.waitKey(0)
