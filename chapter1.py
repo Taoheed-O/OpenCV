@@ -123,8 +123,34 @@ import numpy as np
 
 # color detection
 
+
+def func():
+    pass
+
+
 path = 'resources/images/linux_mint_logo.png'
+cv2.namedWindow('TrackBars')
+cv2.resizeWindow('TrackBars', 640, 240)
+
+
+cv2.createTrackbar('Hue Max', 'TrackBars', 179,179, func)
+cv2.createTrackbar('Hue Min', 'TrackBars', 0,179, func)
+cv2.createTrackbar('Sat Max', 'TrackBars', 255,255, func)
+cv2.createTrackbar('Sat Min', 'TrackBars', 0,255, func)
+cv2.createTrackbar('Val Max', 'TrackBars', 255,255, func)
+cv2.createTrackbar('Val Min', 'TrackBars', 0,255, func)
+
+
 img = cv2.imread(path)
 
+
+
+imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+
+
 cv2.imshow('original', img)
+cv2.imshow('hsv',imgHSV)
+
+
 cv2.waitKey(0)
