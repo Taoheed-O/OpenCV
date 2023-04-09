@@ -167,13 +167,36 @@ import numpy as np
 
 # contours/ shape detection
 
+# image resize function
+def imgResize(img):
+    img = cv2.resize(img, (300,300))
+    return img
+
+# image contour function
+def getContours(img):
+    contours, hierarchy = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
+    for cnt in contours:
+        area = cv2.contourArea(cnt)
+        print(area)
+        cv2.drawContours(imgContour, cnt, -1, (255,0,0),3)
+
+
+
 path = 'resources/images/ubuntu.png'
 img = cv2.imread(path)
+img = imgResize(img)
+imgContour = img.copy()
+
+
+
 
 imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 imgBlur = cv2.GaussianBlur(imgGray, (7,7),1)
+imgCanny = cv2.Canny(imgBlur, 50, 50)
+getContours(imgCanny)
 
 
+cv2.imshow('contour', imgContour)
 cv2.imshow('original', img)
 cv2.imshow('Gray', img)
 cv2.imshow('Blur', imgBlur)
