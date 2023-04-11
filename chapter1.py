@@ -212,8 +212,8 @@ def getContours(img):
             else:
                 objectType = 'unknown'
             
-            cv2.rectangle(imgContour, (x,y),(x+w, y+h),(0,255,0), 2)
-            cv2.putText(imgContour, objectType, (x+(w//2)-10, y+(h//2)-10), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0,0,0), 2)
+            cv2.rectangle(imgContour, (x,y),(x+w, y+h),(0,255,0), 1)
+            cv2.putText(imgContour, objectType, (x+(w//2)-10, y+(h//2)-10), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0,0,0), 1)
 
 
 
