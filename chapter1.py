@@ -195,10 +195,22 @@ def getContours(img):
                     objectType = 'square'
                 else:
                     objectType = 'rectangle'
-            elif objCor > 4:
+            elif objCor == 5:
+                objectType = 'pentagon'
+            elif objCor == 6:
+                objectType = 'hexagon'
+            elif objCor == 7:
+                objectType = 'heptagon'
+            elif objCor == 8:
+                objectType = 'octagon'
+            elif objCor == 9:
+                objectType = 'nonagon'
+            elif objCor == 10:
+                objectType = 'decagon'
+            elif objCor > 10:
                 objectType = 'circle'
             else:
-                objectType = 'None'
+                objectType = 'unknown'
             
             cv2.rectangle(imgContour, (x,y),(x+w, y+h),(0,255,0), 2)
             cv2.putText(imgContour, objectType, (x+(w//2)-10, y+(h//2)-10), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0,0,0), 2)
@@ -208,7 +220,7 @@ def getContours(img):
 
 
 
-path = 'resources/images/ubuntu.png'
+path = 'resources/images/shapes.png'
 img = cv2.imread(path)
 img = imgResize(img)
 imgContour = img.copy()
