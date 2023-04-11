@@ -168,74 +168,93 @@ import numpy as np
 # contours/ shape detection
 
 # image resize function
-def imgResize(img):
-    img = cv2.resize(img, (300,300))
-    return img
+# def imgResize(img):
+#     img = cv2.resize(img, (300,300))
+#     return img
 
-# image contour function
-def getContours(img):
-    contours, hierarchy = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
-    for cnt in contours:
-        area = cv2.contourArea(cnt)
-        print(area)
-        if area > 500:
-            cv2.drawContours(imgContour, cnt, -1, (255,0,0),3)
-            peri = cv2.arcLength(cnt, True)
-            print(peri)
-            approx = cv2.approxPolyDP(cnt, 0.02*peri, True)
-            print(len(approx))
-            objCor = len(approx)
-            x, y, w, h = cv2.boundingRect(approx)
+# # image contour function
+# def getContours(img):
+#     contours, hierarchy = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
+#     for cnt in contours:
+#         area = cv2.contourArea(cnt)
+#         print(area)
+#         if area > 500:
+#             cv2.drawContours(imgContour, cnt, -1, (255,0,0),3)
+#             peri = cv2.arcLength(cnt, True)
+#             print(peri)
+#             approx = cv2.approxPolyDP(cnt, 0.02*peri, True)
+#             print(len(approx))
+#             objCor = len(approx)
+#             x, y, w, h = cv2.boundingRect(approx)
 
-            if objCor == 3:
-                objectType = 'Triangle'
-            elif objCor == 4:
-                aspRatio = w/float(h)
-                if aspRatio > 0.95 and aspRatio < 1.05:
-                    objectType = 'square'
-                else:
-                    objectType = 'rectangle'
-            elif objCor == 5:
-                objectType = 'pentagon'
-            elif objCor == 6:
-                objectType = 'hexagon'
-            elif objCor == 7:
-                objectType = 'heptagon'
-            elif objCor == 8:
-                objectType = 'octagon'
-            elif objCor == 9:
-                objectType = 'nonagon'
-            elif objCor == 10:
-                objectType = 'decagon'
-            elif objCor > 10:
-                objectType = 'circle'
-            else:
-                objectType = 'unknown'
+#             if objCor == 3:
+#                 objectType = 'Triangle'
+#             elif objCor == 4:
+#                 aspRatio = w/float(h)
+#                 if aspRatio > 0.95 and aspRatio < 1.05:
+#                     objectType = 'square'
+#                 else:
+#                     objectType = 'rectangle'
+#             elif objCor == 5:
+#                 objectType = 'pentagon'
+#             elif objCor == 6:
+#                 objectType = 'hexagon'
+#             elif objCor == 7:
+#                 objectType = 'heptagon'
+#             elif objCor == 8:
+#                 objectType = 'octagon'
+#             elif objCor == 9:
+#                 objectType = 'nonagon'
+#             elif objCor == 10:
+#                 objectType = 'decagon'
+#             elif objCor > 10:
+#                 objectType = 'circle'
+#             else:
+#                 objectType = 'unknown'
             
-            cv2.rectangle(imgContour, (x,y),(x+w, y+h),(0,255,0), 1)
-            cv2.putText(imgContour, objectType, (x+(w//2)-10, y+(h//2)-10), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0,0,0), 1)
+#             cv2.rectangle(imgContour, (x,y),(x+w, y+h),(0,255,0), 1)
+#             cv2.putText(imgContour, objectType, (x+(w//2)-10, y+(h//2)-10), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0,0,0), 1)
 
 
 
 
 
 
-path = 'resources/images/shapes.png'
-img = cv2.imread(path)
-img = imgResize(img)
-imgContour = img.copy()
+
+# path = 'resources/images/shapes.png'
+# img = cv2.imread(path)
+# img = imgResize(img)
+# imgContour = img.copy()
 
 
 
 
+# imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# imgBlur = cv2.GaussianBlur(imgGray, (7,7),1)
+# imgCanny = cv2.Canny(imgBlur, 50, 50)
+# getContours(imgCanny)
+
+
+# cv2.imshow('contour', imgContour)
+# cv2.imshow('original', img)
+# cv2.imshow('Gray', img)
+# cv2.imshow('Blur', imgBlur)
+# cv2.waitKey(0)
+
+
+
+# face detection
+# viola and jones method
+
+faceCascade = cv2.CascadeClassifier('resources/haarcascade_frontalface_default.xml')
+img = cv2.imread('resources/profile_pic.jpeg')
 imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-imgBlur = cv2.GaussianBlur(imgGray, (7,7),1)
-imgCanny = cv2.Canny(imgBlur, 50, 50)
-getContours(imgCanny)
 
 
-cv2.imshow('contour', imgContour)
-cv2.imshow('original', img)
-cv2.imshow('Gray', img)
-cv2.imshow('Blur', imgBlur)
+faces = faceCascade.detectMultiScale(imgGray, 1.1, 4)
+
+
+
+
+cv2.imshow('result', img)
 cv2.waitKey(0)
