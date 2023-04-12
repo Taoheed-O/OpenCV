@@ -11,7 +11,7 @@ cam = cv2.VideoCapture(0)
 # cam settings
 cam.set(3, frameWidth)
 cam.set(4, frameHeight)
-cam.set(10, 130)
+cam.set(10, 150)
 
 while True:
     check, frame = cam.read()
