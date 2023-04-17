@@ -64,7 +64,7 @@ def getContours(img):
 
 
 
-path = 'Resources/shapes.png'
+path = 'resources/images/profile_pic.jpeg'
 img = cv2.imread(path)
 imgContour = img.copy()
 
