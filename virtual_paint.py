@@ -28,7 +28,7 @@ def find_color(img, myColors):
         lower = np.array(myColors[0][0:3])
         upper = np.array(myColors[0][3:6])
         mask  = cv2.inRange(imgHSV, lower, upper)
-        cv2.imshow('img', mask)
+        cv2.imshow(str(color[0]), mask)
 
 
 
