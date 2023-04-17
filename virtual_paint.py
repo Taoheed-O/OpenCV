@@ -21,12 +21,12 @@ myColors = []
 
 
 # color finding function 
-# def find_color(img):
-#     imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-#     lower = np.array([h_min, sat_min, val_min])
-#     upper = np.array([h_max, sat_max, val_max])
-#     mask  = cv2.inRange(imgHSV, lower, upper)
-#     cv2.imshow('img', mask)
+def find_color(img):
+    imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    lower = np.array([h_min, sat_min, val_min])
+    upper = np.array([h_max, sat_max, val_max])
+    mask  = cv2.inRange(imgHSV, lower, upper)
+    cv2.imshow('img', mask)
 
 
 
