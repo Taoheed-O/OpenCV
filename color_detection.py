@@ -37,7 +37,7 @@ def stackImages(scale,imgArray):
 
 
 
-path = 'Resources/lambo.png'
+path = 'resources/images/profile_pic.jpeg'
 cv2.namedWindow("TrackBars")
 cv2.resizeWindow("TrackBars",640,240)
 cv2.createTrackbar("Hue Min","TrackBars",0,179,empty)
@@ -71,4 +71,4 @@ while True:
     imgStack = stackImages(0.6,([img,imgHSV],[mask,imgResult]))
     cv2.imshow("Stacked Images", imgStack)
 
-    cv2.waitKey(1)
+    cv2.waitKey(0)
