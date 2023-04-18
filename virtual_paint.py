@@ -28,19 +28,24 @@ myColorValues = [
     [0, 255, 0]   # B G R          values for  green
 ]
 
+myPoints = []
 
 # color finding function 
 def find_color(img, myColors, myColorValues):
     imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     count = 0
+    newPoints = []
     for color in myColors:
         lower = np.array(color[0:3])
         upper = np.array(color[3:6])
         mask  = cv2.inRange(imgHSV, lower, upper)
         x, y = getContours(mask)
         cv2.circle(imgResult, (x, y), 10, myColorValues[count], cv2.FILLED)
+        if x!=0 and y!=0:
+            newPoints.append([x, y, count])
         count+=1
         # cv2.imshow(str(color[0]), mask)
+    return newPoints
 
 
 # get contour function
@@ -56,15 +61,32 @@ def getContours(img):
             x, y, w, h = cv2.boundingRect(approx)
     return x+w//2, y   
 
+
+def drawOnCanvas(myPoints, myColorValues):
+    for point in myPoints:
+        cv2.circle(imgResult, (point[0], point[1]), 10, myColorValues[point[2]], cv2.FILLED)
+
+
 # cam view loop
 while True:
     check, img = cam.read()
     imgResult = img.copy()
-    find_color(img, myColors, myColorValues)
+    newPoints = find_color(img, myColors, myColorValues)
+    if len(newPoints)!=0:
+        for p in newPoints:
+            myPoints.append(p)
+    if len(myPoints) != 0:
+        drawOnCanvas(myPoints, myColorValues)
+
+
+
     cv2.imshow('video', imgResult)
     key = cv2.waitKey(1)
     if key & 0xFF == ord('q'):
         break
+
+
+
 cam.release()
 cv2.destroyAllWindows()
 
