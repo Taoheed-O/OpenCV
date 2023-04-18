@@ -30,6 +30,7 @@ myColorValues = [
 
 myPoints = []
 
+
 # color finding function 
 def find_color(img, myColors, myColorValues):
     imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -89,5 +90,3 @@ while True:
 
 cam.release()
 cv2.destroyAllWindows()
-
-
