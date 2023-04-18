@@ -29,15 +29,28 @@ def find_color(img, myColors):
         lower = np.array(color[0:3])
         upper = np.array(color[3:6])
         mask  = cv2.inRange(imgHSV, lower, upper)
-        cv2.imshow(str(color[0]), mask)
+        getContours(mask)
+        # cv2.imshow(str(color[0]), mask)
 
+
+# get cintour function
+def getContours(img):
+    contours,hierarchy = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
+    for cnt in contours:
+        area = cv2.contourArea(cnt)
+        if area>500:
+            cv2.drawContours(imgResult, cnt, -1, (255, 0, 0), 3)
+            peri = cv2.arcLength(cnt,True)
+            approx = cv2.approxPolyDP(cnt,0.02*peri,True)
+            x, y, w, h = cv2.boundingRect(approx)
 
 
 # cam view loop
 while True:
-    check, frame = cam.read()
-    find_color(frame, myColors)
-    cv2.imshow('video', frame)
+    check, img = cam.read()
+    imgResult = img.copy()
+    find_color(img, myColors)
+    cv2.imshow('video', imgResult)
     key = cv2.waitKey(1)
     if key & 0xFF == ord('q'):
         break
