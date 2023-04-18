@@ -17,16 +17,17 @@ cam.set(10, 150)
 
 
 # color list
-myColors = [[98, 126, 125, 255, 153, 255],
-            [35, 179, 57, 255, 0, 141]]
+myColors = [[5, 107, 0, 19, 255, 255],
+            [133, 56, 0, 159, 156, 255],
+            [57, 76, 0, 100, 255, 255]]
 
 
 # color finding function 
 def find_color(img, myColors):
     imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     for color in myColors:
-        lower = np.array(myColors[0][0:3])
-        upper = np.array(myColors[0][3:6])
+        lower = np.array(color[0:3])
+        upper = np.array(color[3:6])
         mask  = cv2.inRange(imgHSV, lower, upper)
         cv2.imshow(str(color[0]), mask)
 
