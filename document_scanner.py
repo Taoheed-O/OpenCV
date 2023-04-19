@@ -36,7 +36,8 @@ def preProcessing(img):
 while True:
     check, img = cam.read()
     img = cv2.resize(img, (widthImg, heightImg))
-    cv2.imshow('img', img)
+    imgThres = preProcessing(img)
+    cv2.imshow('img', imgThres)
     key = cv2.waitKey(1)
     if key & 0xFF == ord('q'):
         break
