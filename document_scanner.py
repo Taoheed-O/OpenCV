@@ -53,6 +53,7 @@ def getContours(img):
     return biggest
 
 
+
 # cam view loop
 while True:
     check, img = cam.read()
@@ -64,6 +65,7 @@ while True:
     key = cv2.waitKey(1)
     if key & 0xFF == ord('q'):
         break
+
 
 
 cam.release()
