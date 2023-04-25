@@ -41,7 +41,7 @@ def getContours(img):
     contours,hierarchy = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
     for cnt in contours:
         area = cv2.contourArea(cnt)
-        if area>5000:
+        if area>500:
             cv2.drawContours(imgContour, cnt, -1, (255, 0, 0), 3)
             peri = cv2.arcLength(cnt,True)
             #print(peri)
@@ -54,13 +54,20 @@ def getContours(img):
 
 
 
+def getWarp(img, biggest):
+    pass
+
+
+
 # cam view loop
 while True:
     check, img = cam.read()
     img = cv2.resize(img, (widthImg, heightImg))
     imgContour = img.copy()
     imgThres = preProcessing(img)
-    getContours(imgThres)
+    biggest = getContours(imgThres)
+    print(biggest)
+    getWarp(img, biggest)
     cv2.imshow('img', imgContour)
     key = cv2.waitKey(1)
     if key & 0xFF == ord('q'):
