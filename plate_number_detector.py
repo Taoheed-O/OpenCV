@@ -2,7 +2,7 @@ import cv2
 
 
 
-#############################################
+#########################
 frameWidth = 640
 frameHeight = 480
 nPlateCascade = cv2.CascadeClassifier("Resources/haarcascade_russian_plate_number.xml")
@@ -45,4 +45,3 @@ while True:
         cv2.waitKey(500)
         count +=1
 
-        
