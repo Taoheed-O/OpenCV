@@ -28,6 +28,7 @@ myColorValues = [
     [0, 255, 0]   # B G R          values for  green
 ]
 
+
 myPoints = []
 
 
@@ -78,7 +79,7 @@ while True:
             myPoints.append(p)
     if len(myPoints) != 0:
         drawOnCanvas(myPoints, myColorValues)
-
+    
 
 
     cv2.imshow('video', imgResult)
