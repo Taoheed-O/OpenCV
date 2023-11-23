@@ -9,7 +9,7 @@ cv2.waitKey(0)
 
 
 
-# Reading Video
+# # Reading Video
 import cv2
 
 frameWidth = 640

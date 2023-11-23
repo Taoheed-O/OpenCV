@@ -44,4 +44,3 @@ while True:
         cv2.imshow("Result",img)
         cv2.waitKey(500)
         count +=1
-

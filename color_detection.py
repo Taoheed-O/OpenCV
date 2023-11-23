@@ -48,9 +48,20 @@ cv2.createTrackbar("Val Min","TrackBars",153,255,empty)
 cv2.createTrackbar("Val Max","TrackBars",255,255,empty)
 
 while True:
-    img = cv2.imread(path)
-    imgHSV = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
-    h_min = cv2.getTrackbarPos("Hue Min","TrackBars")
+    frameWidth = 640
+    frameHeight = 480
+    cap = cv2.VideoCapture(0)
+    cap.set(3, frameWidth)
+    cap.set(4, frameHeight)
+    cap.set(10, 150)
+
+    success, img = cap.read()
+    cv2.imshow("Result", img)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+    imgHSV = cv2.cvtColor(cap,cv2.COLOR_BGR2HSV)
+    h_min = cv2.getTrackbarPos("Hue Min", "TrackBars")
     h_max = cv2.getTrackbarPos("Hue Max", "TrackBars")
     s_min = cv2.getTrackbarPos("Sat Min", "TrackBars")
     s_max = cv2.getTrackbarPos("Sat Max", "TrackBars")
@@ -68,7 +79,5 @@ while True:
     # cv2.imshow("Mask", mask)
     # cv2.imshow("Result", imgResult)
 
-    imgStack = stackImages(0.6,([img,imgHSV],[mask,imgResult]))
+    imgStack = stackImages(0.6,([cap,imgHSV],[mask,imgResult]))
     cv2.imshow("Stacked Images", imgStack)
-
-    cv2.waitKey(0)
