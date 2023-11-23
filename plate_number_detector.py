@@ -12,7 +12,7 @@ color = (255,0,255)
 
 
 
-cap = cv2.VideoCapture("resources/videos/baby.mp4")
+cap = cv2.VideoCapture(0)
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 cap.set(10,150)
@@ -44,3 +44,4 @@ while True:
         cv2.imshow("Result",img)
         cv2.waitKey(500)
         count +=1
+        
